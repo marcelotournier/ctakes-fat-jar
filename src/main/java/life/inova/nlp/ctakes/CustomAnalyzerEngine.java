@@ -1,22 +1,4 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-package org.apache.ctakes.web.client.servlet;
+package life.inova.nlp.ctakes;
 
 import java.net.URL;
 import java.io.File;
@@ -37,10 +19,10 @@ import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.ExternalResourceFactory;
 
 
-public class Pipeline {	
+public class CustomAnalyzerEngine {	
 	private static URL getTempLVGFilePath() throws IOException {
 		final String lvgProperties = "org/apache/ctakes/lvg/data/config/lvg.properties";
-		InputStream in = Pipeline.class.getClassLoader().getResourceAsStream(lvgProperties);
+		InputStream in = CustomAnalyzerEngine.class.getClassLoader().getResourceAsStream(lvgProperties);
 		File tempFile = File.createTempFile("lvg", ".properties");
 		tempFile.deleteOnExit();
 		FileUtils.copyInputStreamToFile(in, tempFile);
@@ -50,10 +32,8 @@ public class Pipeline {
 	
 
 	public static AggregateBuilder getAggregateBuilder() throws Exception {
-
 		// setup local files for handling URL bug in fat jar
 		URL lvgPath = getTempLVGFilePath();
-		System.out.println("lvgPath URL => " + lvgPath); // debug
 
 		AggregateBuilder builder = new AggregateBuilder();
 		  builder.add(SimpleSegmentAnnotator.createAnnotatorDescription());
@@ -68,8 +48,6 @@ public class Pipeline {
 				"DictionaryDescriptor",
 				"org/apache/ctakes/dictionary/lookup/fast/sno_rx_16ab.xml"
 				));
-		  // builder.add(LvgAnnotator.createAnnotatorDescription()); // breaking
-		  // create a custom engine description for LVG:
 		  builder.add(AnalysisEngineFactory.createEngineDescription(
 				LvgAnnotator.class,
 				LvgAnnotator.PARAM_USE_CMD_CACHE,

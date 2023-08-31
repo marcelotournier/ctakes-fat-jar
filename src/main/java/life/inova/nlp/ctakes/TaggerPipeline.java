@@ -1,4 +1,4 @@
-package org.apache.ctakes.web.client.servlet;
+package life.inova.nlp.ctakes;
 
 import java.io.ByteArrayOutputStream;
 import org.apache.uima.jcas.JCas;
@@ -13,7 +13,7 @@ public class TaggerPipeline {
     AnalysisEngine pipeline;
     
     public void init() throws Exception {
-       builder = Pipeline.getAggregateBuilder();
+       builder = CustomAnalyzerEngine.getAggregateBuilder();
        pipeline = builder.createAggregate();
     }
     
