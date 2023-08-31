@@ -14,7 +14,7 @@ Build the fat jar with  `mvn clean package` and
 run it with `java -jar target/ctakes-1.0-SNAPSHOT.jar`:
 
 ```scala
-import import life.inova.nlp.ctakes.TaggerPipeline
+import life.inova.nlp.ctakes.TaggerPipeline
 
 // Get a pipeline to work with:
 val pipe = new TaggerPipeline()
