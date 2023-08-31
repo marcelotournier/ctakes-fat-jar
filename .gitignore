@@ -1,0 +1,7 @@
+data/
+target/
+.vscode/
+.idea/
+dependency-reduced-pom.xml
+results.json
+results.xml
