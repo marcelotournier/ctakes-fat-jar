@@ -32,6 +32,11 @@ reflect.io.File("results.json").writeAll(results)
 reflect.io.File("results.xml").writeAll(resultsXML.replace("><", ">\n<"))
 ```
 
+## TODOs
+- Fix exceptions related to file paths (works only in `./target` for now)
+- Make it compatible with new UMLS versions
+- Write python bindings
+
 ## References
 - https://ctakes.apache.org
 - https://github.com/healthnlp/examples
